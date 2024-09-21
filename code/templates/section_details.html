@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+    table{
+    border: 2px solid black;
+    display: block;
+    padding-top: 3%;
+    padding-left: 2%;
+    background-color: #5f0f40;
+    color: white;
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <h2 class="navbar-brand">Book Haven</h2>
+            <ul class="navbar-nav ml-auto">
+                <li>
+                    <a class="nav-link" href="{{ url_for('add_section') }}">add section</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{{ url_for('monitor_books') }}">monitor books</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{{ url_for('librarian_dashboard_requests') }}">requested books</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{{ url_for('librarian_stats') }}">stats</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+            </ul>
+
+    </nav>
+    
+    <div class="container mt-5">
+        <h1>Section Details</h1>
+        <form action="{{ url_for('search_section') }}" method="GET" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for section..." name="search">
+                <div>
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                </div>
+            </div>
+            <br>
+            {% for messages in get_flashed_messages() %}
+                    <div class="alert alert-secondary" role="alert">
+                            {{messages}}  <a href="{{url_for('section_details')}}">again</a>
+                    </div>
+            {% endfor %}
+        </form>
+    </div>
+    
+    <div class="container">
+        <div class="col-md-6 ">
+            <a href="/add_section" class="btn btn-primary">Add Section</a>
+        </div>
+        <div class="row">
+            {% for section in sections %}
+                <div class="col-md-6">
+                    <table class="justify-content-center">
+                        <tr>
+                            <td><a href="{{ url_for('book_summary', section_id=section.section_id) }}"><h3>section History</h3></a></td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Title: </td> 
+                            <td>{{ section.name }}</td>
+                        </tr>
+                        <br>
+                        <tr>
+                            <td>Description: </td> 
+                            <td>{{ section.description}} </td>
+                        </tr>
+                        <br>
+                        <tr>
+                            <td>Book Count:</td>
+                            <td>{{ section.books|length}} </td>
+                        </tr>
+
+                        <br>
+                        <tr>
+                            <td>
+                                <form action="{{ url_for('book', section_id=section.section_id) }}" method="GET">
+                                    <input type="hidden" name="section_id" value="{{ section.id }}">
+                                    <button type="submit" class="btn btn-primary">Add Books</button>
+                                </form>
+                            </td>  
+                        </tr>
+
+                        <br>
+                        <br>
+                        <tr>
+                            <td>
+                                <a href="/{{section.section_id}}/update_section"><button class="btn btn-primary" style="color: white;">  Edit Section </button></a>
+                            </td>
+                            <td>
+                                <form action="{{ url_for('delete_section', section_id=section.section_id) }}" method="POST">
+                                    <button type="submit" class="btn btn-danger">Delete section</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    
+                </div>  <br>    
+            {% endfor %}      
+        </div>
+    </div>          
+</body>
+</html>

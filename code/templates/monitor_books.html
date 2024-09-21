@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor Books</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="bg-success">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <h2 class="navbar-brand">Book Haven</h2>
+             <ul class="navbar-nav ml-auto">
+                <li class="nav-item" >
+                    <a class="nav-link" href="{{ url_for('section_details') }}">section details</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{{ url_for('add_section') }}">add section</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{{ url_for('librarian_dashboard_requests') }}">requested books</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="{{ url_for('librarian_stats') }}">stats</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+            </ul>
+        
+    </nav>
+   
+    <div class="container mt-5">
+        <h1>Monitor Books</h1>
+        <table class="table table-hover table-dark">
+            <thead>
+                <tr>
+                    <th>Book Name</th>
+                    <th>Book Author</th>
+                    <th>section Name</th>
+                    <th>Issued To</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for book_info in books_info %}
+                <tr>
+                    <td>{{ book_info.book_name }}</td>
+                    <td>{{book_info.book_author}}</td>
+                    <td>{{book_info.section_name}}</td>
+                    <td>{{ book_info.user_id }}</td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

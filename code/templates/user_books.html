@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Added Books</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <h2 class="navbar-brand">Book Haven</h2>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('my_books') }}">My Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('user_dashboard') }}">User Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('user_stats')}}">Stats</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('user_profile') }}">user profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('requested_books') }}">requested books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        
+        <form action="{{ url_for('search_book') }}" method="GET" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for books..." name="search">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                </div>
+                <br>
+            </div>
+            <br>
+            <div>
+                {% for messages in get_flashed_messages() %}
+                    <div class="alert alert-secondary" role="alert">
+                            {{messages}}  <a href="{{url_for('user_books')}}">again</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </form>
+       
+        <div class="row">
+            {% for book in books %}
+            <div class="col-md-6">
+                <li class="list-group-item bg-secondary">
+                    <strong>Title:</strong> {{ book.name }}<br>
+                    <strong>Author:</strong> {{ book.authors }}<br>
+                    <strong>Section Title:</strong> {{ book.section.name }}<br>
+                    <strong>Description :</strong>{{book.section.description}}
+                    <br>
+                    <br>
+                    <form action="{{ url_for('request_book') }}" method="post">
+                        <input type="hidden" name="book_id" value="{{ book.book_id }}">
+                        <button type="submit" class="btn btn-primary btn-sm ml-2">Request</button>
+                    </form>
+                </li>
+                <br>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <h2 class="navbar-brand">Book spot</h2>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('my_books',) }}">MY Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('user_books') }}"> Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('user_profile') }}">user profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('user_stats')}}">Stats</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('requested_books') }}">requested books</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container justify-content-center mt-4">
+        <div class="card-body col-md-6">
+            <h2>welcome {{user.Name}}</h2>
+            <br>
+            <img class='card-img-bottom' src="\static\gabriel-sollmann-Y7d265_7i08-unsplash.jpg"/>
+        </div>    
+    </div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adding Section</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body class="bg-info">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <h2 class="navbar-brand">Book Haven</h2>
+            <ul class="navbar-nav ml-auto">
+                <li>
+                    <a class="nav-link" href="{{ url_for('section_details') }}">section details</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{{ url_for('monitor_books') }}">monitor books</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{{ url_for('librarian_dashboard_requests') }}">requested books</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{{ url_for('librarian_stats') }}">stats</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        {% for messages in get_flashed_messages() %}
+          <div class="alert alert-primary" role="alert">
+            {{messages}}
+          </div>
+        {% endfor %}
+        <form action="/add_section" method="POST">
+            <div class="col-md-4">
+                <label for="name">Title:</label>
+                <input type="text" name="name" class="form-control" required>
+            </div>
+            <br>
+            <div class="col-md-8">
+                <label for="description">Description:</label>
+                <input type="text" name="description" class="form-control">
+            </div>
+            <br>
+            <br>
+            <button type="submit" class="btn btn-primary">Add Section</button>
+        </form>
+    </div>
+</body>
+</html>

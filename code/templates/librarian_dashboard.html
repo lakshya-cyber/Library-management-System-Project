@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Librarian Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body >
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <h2 class="navbar-brand">Book Haven</h2>
+             <ul class="navbar-nav ml-auto">
+                <li class="nav-item" >
+                    <a class="nav-link" href="{{ url_for('section_details') }}">section details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('monitor_books') }}">monitor books</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="{{ url_for('librarian_dashboard_requests') }}">requested books</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="{{ url_for('librarian_stats') }}">stats</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+            </ul>
+    </nav>
+    <div class="container mt-5">
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6">
+                <div  class="card">
+                    <div class="card-header">
+                        <h2>{{librarian.username}} Dashboard</h2>
+                        <h3>welcome {{librarian.username}}</h3>
+                    </div>
+                    <img class='card-img-bottom' src="\static\gabriel-sollmann-Y7d265_7i08-unsplash.jpg"/>
+                    <br>
+                    <div class="card-body">
+                        <a href="/add_section" class="btn btn-primary">Add Section</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

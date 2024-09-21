@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Request</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <h2 class="navbar-brand">Book Haven</h2>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('my_books') }}">My Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('user_dashboard') }}">User Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('user_books') }}"> Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('user_profile') }}">user profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('requested_books') }}">requested books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('user_stats')}}">Stats</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Request Book</h1>
+        {% for messages in get_flashed_messages() %}
+            <div class="alert alert-success" role="alert">
+                {{messages}}
+            </div>
+        {% endfor %}
+        
+        <form action="{{ url_for('request_book_form',book_id=book.book_id) }}" method="POST">
+            <div class="form-group">
+                <label for="book_name">Book Name:</label>
+                <input type="text" class="form-control" id="book_name" name="book_name" value="{{ book.name }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="section_name">Section Name:</label>
+                <input type="text" class="form-control" id="section_name" name="section_name" value="{{ section.name }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="day_request">Requested:</label>
+                <input type="number" class="form-control" id="day_request" name="day_request" required>
+
+            </div>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" readonly>
+            </div>
+            <button type="submit" class="btn btn-primary">Request Book</button>
+        </form>
+    </div>
+</body>
+</html>
