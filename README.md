@@ -34,7 +34,7 @@ Clone the repository: Navigate to the project directory.
 Before we could use the web app, we need to setup the environment and servers for it.
 1) <b>Setting up  virtual environment : <b>
     - In a new Linux terminal tab, activate a virtual environment
-          source myenv/bin/activate
+            source myenv/bin/activate
           
 2) <b>Setting up the Flask server :</b>   
    - In a new Linux terminal tab, start the Flask server by typing 
