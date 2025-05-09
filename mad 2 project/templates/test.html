@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monthly Report</title>
+  </head>
+  <body>
+    Dear {{ email.username }},
+    {% if sections %}
+    <p>Here is your details for past month Activity.</p>
+    <p>Section:</p>
+    <ul>
+      {% for section in sections %}
+      <h3>Section Name: {{ section.name }}</h3>
+      <hr />
+      <ul>
+        {% for book in section.books %}
+        <li>
+          Book: {{ book.name }} Published by {{ book.authors }} 
+          {% if book.requests  %}
+          <br />
+          Details:
+          <ul>
+            {% for request in book.requests %}
+            <li>Issu Date: {{ request.date_issued }} </li>
+            <li>Expiry Date: {{ request.expiration_date }}</li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <br />
+          No records yet.
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No section created yet.</p>
+    {% endif %} Regards,<br />
+    Book Havana Team
+  </body>
+</html>
